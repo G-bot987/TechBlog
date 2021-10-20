@@ -11,20 +11,20 @@ BlogPost.init(
             primaryKey: true,
             autoIncrement: true,
         },
-        Title: {
+        title: {
             type: DataTypes.STRING,
             allowNull: false,
         },
 
-        Topic: {
+        topic: {
             type: DataTypes.STRING,
             allowNull: true,
         },
-        Post: {
+        description: {
             type: DataTypes.TEXT,
             allowNull: true,
         },
-        PostOwnerId: {
+        postOwnerId: {
             type: DataTypes.INTEGER,
             references: {
                 model: 'User',
@@ -33,7 +33,6 @@ BlogPost.init(
             }
         },
     },
-
     {
         sequelize,
         timestamps: false,

@@ -1,63 +1,22 @@
+const faker = require('faker');
+
 const { blogpost, BlogPost } = require('../models');
 
-const BlogPostData = [
-    {
-        Title: 'A test title 1.',
-        Topic: 'HTML',
-        Post: 'this is a test post',
-        PostOwnerId: 1,
-      },
-    //   {
-    //     text: 'A test review 2.',
-    //     rating: 5,
-    //     user_id: 2,
-    //     restaurant_id: 1,
-    //   },
-    //   {
-    //     text: 'A test review 3.',
-    //     rating: 1,
-    //     user_id: 3,
-    //     restaurant_id: 1,
-    //   },
+const BlogPostData = [...Array(1000)].map(() => ({
+  title: faker.internet.userName(),
+  topic: faker.internet.userName(),
+  post: faker.internet.userName(),
+  postOwnerId: 1,
+}));
 
-    //   {
-    //     text: 'A test review 4',
-    //     rating: 1,
-    //     user_id: 1,
-    //     restaurant_id: 2,
-    //   },
-    //   {
-    //     text: 'A test review 5',
-    //     rating: 5,
-    //     user_id: 2,
-    //     restaurant_id: 2,
-    //   },
-    //   {
-    //     text: 'A test review 6',
-    //     rating: 2,
-    //     user_id: 3,
-    //     restaurant_id: 2,
-    //   },
-    //   {
-    //     text: 'A test review 7',
-    //     rating: 5,
-    //     user_id: 1,
-    //     restaurant_id: 3,
-    //   },
-    //   {
-    //     text: 'A test review 8',
-    //     rating: 1,
-    //     user_id: 2,
-    //     restaurant_id: 3,
-    //   },
-    //   {
-    //     text: 'A test review 9',
-    //     rating: 5,
-    //     user_id: 3,
-    //     restaurant_id: 3,
-    //   },
-];
-
-const seedBlogPost = () => BlogPost.bulkCreate(BlogPostData);
+const seedBlogPost = async () => {
+  try {
+    console.log('Seeding blog posts');
+    await BlogPost.bulkCreate(BlogPostData);
+    console.log('Seeded blog posts');
+  } catch (error) {
+    console.error('ERROR - seedBlogPost():', error);
+  }
+};
 
 module.exports = seedBlogPost;

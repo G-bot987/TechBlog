@@ -17,10 +17,17 @@ const UserData = [
         password: 'test1234',
       },
 ];
-const seedUser = () => User.bulkCreate(UserData);
+const seedUsers = async () => {
+  try {
+    await User.bulkCreate(UserData)
+  } catch (error) {
+    console.error('ERROR - seedUsers():', error);
+    throw error;
+  }
+};
 // const seedUser = () => User.bulkCreate(UserData, {
 // individualHooks: true,
 // returning: true
 // });
 
-module.exports = seedUser;
+module.exports = seedUsers;
