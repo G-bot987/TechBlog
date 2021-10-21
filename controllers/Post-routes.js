@@ -13,8 +13,8 @@ const { Sequelize } = require("sequelize");
 //   // We render the template, 'all', passing in Post, a new array of serialized objects.
 //   res.render('all', { Posts });
 // });
-
 router.get('/', async (req, res) => {
+  // render to post
   res.render('post');
 });
 

@@ -23,9 +23,9 @@ app.set('view engine', 'handlebars');
 app.use(express.static(path.join(__dirname, 'public')));
 // app.use('/api/post', require('./controllers/Post-routes'));
 
-app.get('/api/post', (req, res) => {
-  res.send('hello world');
-})
+// app.get('/api/post', (req, res) => {
+//   res.send('hello world');
+// })
 
 // sync sequelize models to the database, then turn on the server
 sequelize.sync({ force: true }).then(async () => {

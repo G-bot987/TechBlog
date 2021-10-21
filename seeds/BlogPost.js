@@ -1,12 +1,12 @@
 const faker = require('faker');
 
-const { blogpost, BlogPost } = require('../models');
+const { BlogPost } = require('../models');
 
-const BlogPostData = [...Array(1000)].map(() => ({
-  title: faker.internet.userName(),
-  topic: faker.internet.userName(),
-  post: faker.internet.userName(),
-  postOwnerId: 1,
+const BlogPostData = [...Array(10)].map(() => ({
+  title: faker.name.jobType(),
+  topic: faker.lorem.sentence(),
+  description: faker.lorem.paragraph(),
+  postOwnerId: faker.random.number ({ min: 1, max: 10 }),
 }));
 
 const seedBlogPost = async () => {
