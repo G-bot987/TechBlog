@@ -6,7 +6,7 @@ const BlogPostData = [...Array(10)].map(() => ({
   title: faker.name.jobType(),
   topic: faker.lorem.sentence(),
   description: faker.lorem.paragraph(),
-  postOwnerId: faker.random.number ({ min: 1, max: 10 }),
+  postOwnerId: faker.datatype.number ({ min: 1, max: 10 }),
 }));
 
 const seedBlogPost = async () => {

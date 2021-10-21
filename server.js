@@ -11,6 +11,7 @@ const PORT = process.env.PORT || 3001;
 const sequelize = require('./config/connection');
 const seedBlogPost = require('./seeds/BlogPost');
 const seedUsers = require('./seeds/UserData');
+const seedComments = require('./seeds/Comments')
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -32,6 +33,7 @@ sequelize.sync({ force: true }).then(async () => {
   try {
     await seedUsers();
     await seedBlogPost();
+    await seedComments();
   
     app.listen(PORT, () => console.log('Now listening'));
   } catch (error) {
