@@ -10,7 +10,7 @@ router.get('/', async (req, res) => {
       include: [User, Comments]
     });
     // display all posts, parsed data to display
-    res.render('homepage', { posts: JSON.parse(JSON.stringify(posts)) });
+    res.render('login', { posts: JSON.parse(JSON.stringify(posts)) });
     
     // res.status(200).json(posts);
     // console.table(posts)
