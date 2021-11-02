@@ -1,10 +1,11 @@
 // import sequelize connection
 const express = require('express');
-const routes = require('./routes');
 // Import express-handlebars
 const exphbs = require('express-handlebars');
 const hbs = exphbs.create({});
 const path = require('path');
+const session = require("express-session");
+const SequelizeStore = require("connect-session-sequelize")(session.Store);
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -16,7 +17,17 @@ const seedComments = require('./seeds/Comments')
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(routes);
+
+const sess = {
+  secret: "supermegatechblogsecret",
+  cookie: {},
+  resave: false,
+  saveUninitialized: true,
+  store: new SequelizeStore({
+    db: sequelize,
+  }),
+};
+app.use(session(sess));
 
 // The following two lines of code are setting Handlebars.js as the default template engine.
 app.engine('handlebars', hbs.engine);
@@ -25,21 +36,23 @@ app.use(express.static(path.join(__dirname, 'public')));
 // app.use('/api/post', require('./controllers/Post-routes'));
 
 // app.get('/api/post', (req, res) => {
-//   res.send('hello world');
-// })
-
-// sync sequelize models to the database, then turn on the server
-sequelize.sync({ force: true }).then(async () => {
-  try {
-    await seedUsers();
-    await seedBlogPost();
-    await seedComments();
+  //   res.send('hello world');
+  // })
+  const routes = require('./routes');
+  app.use(routes);
   
-    app.listen(PORT, () => console.log('Now listening'));
-  } catch (error) {
-    console.error('ERROR - init():', error);
-    process.exit(1);
-  }
+  // sync sequelize models to the database, then turn on the server
+  sequelize.sync({ force: true }).then(async () => {
+    try {
+      await seedUsers();
+      await seedBlogPost();
+      await seedComments();
+      
+      app.listen(PORT, () => console.log('Now listening'));
+    } catch (error) {
+      console.error('ERROR - init():', error);
+      process.exit(1);
+    }
 });
 
 // // turn on connection to db and server

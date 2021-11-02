@@ -7,6 +7,7 @@ const BlogPostData = [...Array(10)].map(() => ({
   topic: faker.lorem.sentence(),
   description: faker.lorem.paragraph(),
   postOwnerId: faker.datatype.number ({ min: 1, max: 10 }),
+  created_at: faker.date.between('2015-01-01', '2021-01-11'),
 }));
 
 const seedBlogPost = async () => {

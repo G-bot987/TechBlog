@@ -1,0 +1,10 @@
+<div class="div">
+      <li>{{title}}</li>
+      <li>created by {{User.name}}</li>
+      <li>{{created_at}}</li>
+      <li>{{topic}}</li>
+      <li>{{description}}</li>
+      {{#each Comments as |comment|}}
+      {{>comments}}
+      {{/each}}
+</div>

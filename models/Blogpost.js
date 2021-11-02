@@ -32,6 +32,13 @@ BlogPost.init(
                 unique: false
             }
         },
+
+        created_at: {
+            type: 'TIMESTAMP',
+            defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
+            allowNull: false
+          },
+
     },
     {
         sequelize,
