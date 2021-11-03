@@ -21,6 +21,35 @@ const loginFormHandler = async (event) => {
     }
   };
 
+
+  // sign up
+  const signupFormHander = async (event) => {
+ 
+    event.preventDefault();
+    const email = document.querySelector('#email-signup').value.trim();
+    const password = document.querySelector('#password-signup').value.trim();
+    const username = document.querySelector('#username-signup').value.trim();
+  
+  
+    if (email && password && username) {
+      const response = await fetch('/api', {
+        method: 'POST',
+        body: JSON.stringify({name: username, email, password }),
+        headers: { 'Content-Type': 'application/json' },
+      });
+      if (response.ok) {
+        document.location.replace('/');
+      } else {
+        alert("Unable to create user");
+      }
+    }
+  };
+
+
   document
   .querySelector('#login-form')
-  // .addEventListener('#submit', loginFormHandler);
+  .addEventListener('submit', loginFormHandler);
+
+  document
+  .querySelector('#signup-form')
+  .addEventListener('submit', signupFormHander);

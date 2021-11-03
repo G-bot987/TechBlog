@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { BlogPost, User, Comments } = require('../../models');
 
 router.get('/:id', async (req, res) => {
-    // find all BlogPost
+    // find BlogPost by id
     // be sure to include its associated User
   
     try {
