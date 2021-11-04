@@ -20,7 +20,9 @@ app.use(express.urlencoded({ extended: true }));
 
 const sess = {
   secret: "supermegatechblogsecret",
-  cookie: {},
+  cookie: {
+    maxAge: 54000,
+  },
   resave: false,
   saveUninitialized: true,
   store: new SequelizeStore({
@@ -35,9 +37,7 @@ app.set('view engine', 'handlebars');
 app.use(express.static(path.join(__dirname, 'public')));
 // app.use('/api/post', require('./controllers/Post-routes'));
 
-// app.get('/api/post', (req, res) => {
-  //   res.send('hello world');
-  // })
+
   const routes = require('./routes');
   app.use(routes);
   

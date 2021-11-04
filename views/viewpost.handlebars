@@ -4,7 +4,25 @@
       <li>{{created_at}}</li>
       <li>{{topic}}</li>
       <li>{{description}}</li>
+
+
       {{#each Comments as |comment|}}
       {{>comments}}
       {{/each}}
+
+       <div>
+
+  
+
+        <h2>Leave Your Comment:</h2>
+        {{!-- maybeBlogPost --}}
+        <form action="submit" id ="commentForm" data-id ="{{post.id}}">
+            <label for="reviewText">Your comments:</label>
+            <br>
+            <textarea name="commentText" id="commentText"></textarea>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script src="/js/comment.js"></script>
 </div>
