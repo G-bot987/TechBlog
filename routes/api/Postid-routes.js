@@ -3,7 +3,7 @@ const { BlogPost, User, Comments } = require('../../models');
 
 router.get('/:id', async (req, res) => {
     // find BlogPost by id
-    // be sure to include its associated User
+    
     
     try {
       const postData = await BlogPost.findByPk(req.params.id,{
@@ -13,16 +13,12 @@ router.get('/:id', async (req, res) => {
       
       });
  
-      // changed to view post from post/:id
+ 
       const post = postData.get({plain: true})
-      // console.log('obj', postData.Comments.User )
+      
       res.render('viewpost', post);
       console.log('this is post:', post )
-      // destructing post
-      
-      // res.status(200).json(post);
-      // console.log('post data', post)
-      // console.log('comment data', comments)
+
     } catch (err) {
       res.status(500).json(err);
     }
@@ -41,7 +37,7 @@ router.get('/:id', async (req, res) => {
       });
       
        console.log('new comment', req.session.user_id, 'commentpost', req.params.id)
-  
+  console.log('new comment', newComment)
       res.status(200).json(newComment);
     } catch (err) {
       res.status(400).json(err);
@@ -64,5 +60,9 @@ router.get('/:id', async (req, res) => {
   //       res.json(err);
   //     });
   // });
+
+
+
+
 
 module.exports = router;

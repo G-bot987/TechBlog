@@ -43,6 +43,7 @@ router.get('/login', async (req, res) => {
   // render to dashboard
   router.get('/dashboard', withAuth, async (req, res) => {
     console.log(req.session)
+    
     res.render('dashboard');
   });
 

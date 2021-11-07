@@ -4,7 +4,12 @@
   <div>
             <button type="logout">logout</button>
         </div>
+  
 
+{{#each posts as |post|}}
+    {{>post}}
+{{/each}}
+        
 
 <script src="/js/dashboard.js"></script>    
 </div>
