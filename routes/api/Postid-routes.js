@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { BlogPost, User, Comments } = require('../../models');
+const withAuth = require("../../util/auth")
 
 router.get('/:id', async (req, res) => {
     // find BlogPost by id
@@ -27,7 +28,7 @@ router.get('/:id', async (req, res) => {
 
 
   // leave a comment
-  router.post("/:id", async (req, res) => {
+  router.post("/:id", withAuth, async (req, res) => {
     try {
       const newComment = await Comments.create({
           ...req.body,
