@@ -20,7 +20,7 @@ const newCommentHandler = async (event) => {
     });
     
     if (response.ok) {
-      document.location.replace(`/post/${id}`);
+      document.location.replace(`/api/post/${id}`);
     } else {
       alert('Failed to post comment');
     }

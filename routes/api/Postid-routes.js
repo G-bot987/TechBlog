@@ -32,7 +32,7 @@ router.get('/:id', async (req, res) => {
     try {
       const newComment = await Comments.create({
           ...req.body,
-          
+          commentbody: req.body.text,
           commentOwnerId: req.session.user_id,
           commentedPost: req.params.id,
       });
@@ -41,6 +41,7 @@ router.get('/:id', async (req, res) => {
   console.log('new comment', newComment)
       res.status(200).json(newComment);
     } catch (err) {
+      console.log(err)
       res.status(400).json(err);
     }
   });

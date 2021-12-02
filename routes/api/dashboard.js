@@ -2,13 +2,27 @@ const router = require('express').Router();
 const { BlogPost, User, Comments } = require("../../models");
 const withAuth = require("../../util/auth")
 
+router.get('/', withAuth, async () => {
+    try {
+        const { id } = req.session;
+        const currentUser = await User.findByPk(id);
 
+        const posts = await BlogPost.findAll({ where: { postOwnerId: id }, raw: true });
+
+        res.render('dashboard', { posts, 
+            logged_in: req.session.logged_in, currentUser})
+    } catch (error) {
+        console.error('ERROR - dashboard.js - / get:', error);
+    }
+});
 
 router.get('/', withAuth, async (req , res) =>{
+    console.log('test')
     const findUser = await User.findOne({
         where: {
             id: req.session.user_id,
-        }
+        },
+        raw: true,
     });
     
     const currentUser = await findUser.get({ plain: true });
@@ -40,7 +54,7 @@ console.log('postdata dash', postData)
     const userPosts = postData.map((eachRest) => 
     eachRest.get({ plain: true })
     );
-
+console.log('userposts', userPosts)
     res.render('dashboard', { posts: userPosts, 
         logged_in: req.session.logged_in, currentUser});
 
