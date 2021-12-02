@@ -86,41 +86,6 @@ router.post('/', async (req, res) => {
 
 
 
-// const { respondErrorMessages } = require("../services/responses.service");
-
-// module.exports.validateData = (validation) => {
-//     return (req, res, next) => {
-//         const { value, error } = validation.validate(req.body);
-//         if (error) {
-//             const messages = error.details.map(({ message }) => message);
-//             return res.status(401).json(respondErrorMessages(messages));
-//         }
-//         req.value = { ...value, ...req.value };
-//         next();
-//     }
-// }
-
-
-// router.post('/signUp', validateData(signUpValidation), async (req, res) => {
-
-//   const role = await RoleModel.findByPk(req.value.roleId);
-//   if (!role) return res.status(404).json(respondErrorMessage('The provided roleId does not exist'));
-
-//   const foundUser = await UserModel.findOne({ where: { email: req.value.email } });
-//   if (foundUser) return res.status(400).json(respondErrorMessage('A user with this email already exists'));
-
-//   const salt = await bcryptjs.genSalt(10);
-//   const hash = await bcryptjs.hash(req.value.password, salt);
-
-//   const newUser = await UserModel.create({
-//       ...req.value,
-//       password: hash,
-//   });
-
-//   res.json(sanitiseUser(newUser.toJSON()))
-// });
-
-
 
 
 

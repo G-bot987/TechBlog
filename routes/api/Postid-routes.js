@@ -4,30 +4,43 @@ const withAuth = require("../../util/auth")
 
 router.get('/:id', async (req, res) => {
     // find BlogPost by id
-    
-    
-    try {
-      const postData = await BlogPost.findByPk(req.params.id,{
-        include: [{model: User},
-        {model: Comments, 
-        include: { model: User, attributes: ["name"],}} ],
+     
+      try {
+        const postData = await BlogPost.findByPk(req.params.id,{
+          include: [{model: User} ],
+        
+        });
+   
+   
+        const post = postData.get({plain: true})
       
-      });
- 
- 
-      const post = postData.get({plain: true})
-      
-      res.render('viewpost', post);
-      console.log('this is post:', post )
+        const commentData = await Comments.findAll({
+          where: {
+            commentedPost: req.params.id
+          },
+          include: {
+              model: User
+          }
 
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  });
+        })
 
+        const commentUserData= await commentData.map( comment => comment.get({plain: true}))
 
 
-  // leave a comment
+        post.comments = commentUserData
+        console.log('this is post:', post )
+        console.log('comments', post.comments)
+
+        res.render('viewpost', post);
+  
+      } catch (err) {
+        res.status(500).json(err);
+      }
+    });
+
+
+
+      // leave a comment
   router.post("/:id", withAuth, async (req, res) => {
     try {
       const newComment = await Comments.create({
@@ -45,7 +58,7 @@ router.get('/:id', async (req, res) => {
       res.status(400).json(err);
     }
   });
-
+  
   // router.post('/:id', (req, res) => {
   //   // Use Sequelize's `create()` method to add a row to the table
   //   // Similar to `INSERT INTO` in plain SQL

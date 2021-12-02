@@ -16,7 +16,7 @@ const seedComments = require('./seeds/Comments')
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
+// map over comments add another property that gives user  name. 
 
 const sess = {
   secret: "supermegatechblogsecret",
