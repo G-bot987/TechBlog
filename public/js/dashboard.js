@@ -12,4 +12,4 @@ const logout = async () => {
     }
   };
   
- addEventListener('click', logout);
+ 

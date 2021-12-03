@@ -40,24 +40,29 @@ router.get('/login', async (req, res) => {
     res.render('homepage', { posts});
   });
 
-  router.get('/dashboard', withAuth, async (req , res) =>{
+  router.get('/createnewpost', async (req, res) =>{ 
+    res.render('createnewpost')
+  });
+
+  router.get('/dashboard', withAuth, async function (req , res) {
     console.log('test')
+    console.log('REQ.SES.ID', req.session.user_id)
     const findUser = await User.findOne({
         where: {
             id: req.session.user_id,
         },
         raw: true,
     });
-    
-    const currentUser = await findUser.get({ plain: true });
-
+    console.log('find user', findUser)
+    const currentUser = await findUser
+    console.log('currentUser', currentUser)
 // gets posts user has added
     const postData = await BlogPost.findAll({
         attributes : ['id', 'title', 'topic', 'description'],
       group: ['id'],
       
         where: {
-            owner_id: req.session.user_id,
+            post_owner_id: req.session.user_id,
        },
         include: [
             {
