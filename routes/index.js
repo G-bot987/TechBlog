@@ -41,6 +41,7 @@ router.get('/login', async (req, res) => {
   });
 
   router.get('/createnewpost', async (req, res) =>{ 
+ 
     res.render('createnewpost')
   });
 
