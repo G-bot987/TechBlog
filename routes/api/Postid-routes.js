@@ -73,6 +73,25 @@ router.get('/:id', async (req, res) => {
           res.status(500).json(err);
         }
       });
+// delete post
+      router.delete("/:id/postedit", async (req, res) => {
+        try {
+          const postData = await BlogPost.destroy({
+            where: {
+              id: req.params.id,
+            },
+          });
+      
+          if (!postData) {
+            res.status(404).json({ message: "No Post found with this id!" });
+            return;
+          }
+      
+          res.status(200).json(postData);
+        } catch (err) {
+          res.status(500).json(err);
+        }
+      });
 
 
 
