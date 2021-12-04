@@ -35,7 +35,7 @@ router.get('/login', async (req, res) => {
       raw: true
     });
     // const posts = postsData.get({plain: true})
-    // console.log('posts', posts); 
+    console.log('posts homepage', posts); 
  
     res.render('homepage', { posts});
   });
@@ -59,7 +59,7 @@ router.get('/login', async (req, res) => {
     console.log('currentUser', currentUser)
 // gets posts user has added
     const postData = await BlogPost.findAll({
-        attributes : ['id', 'title', 'topic', 'description'],
+        attributes : ['id', 'title', 'topic', 'description', 'created_at'],
       group: ['id'],
       
         where: {
