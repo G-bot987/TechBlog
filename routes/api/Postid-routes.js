@@ -38,6 +38,42 @@ router.get('/:id', async (req, res) => {
       }
     });
 
+    router.get('/:id/postedit', async (req, res) => {
+      // find BlogPost by id for edit
+       
+        try {
+          const postData = await BlogPost.findByPk(req.params.id,{
+            include: [{model: User} ],
+          
+          });
+     
+     
+          const post = postData.get({plain: true})
+        
+          const commentData = await Comments.findAll({
+            where: {
+              commentedPost: req.params.id
+            },
+            include: {
+                model: User
+            }
+  
+          })
+  
+          const commentUserData= await commentData.map( comment => comment.get({plain: true}))
+  
+  
+          post.comments = commentUserData
+          console.log('this is post:', post )
+          console.log('comments', post.comments)
+  
+          res.render('postedit', post);
+    
+        } catch (err) {
+          res.status(500).json(err);
+        }
+      });
+
 
 
       // leave a comment
