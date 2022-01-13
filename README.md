@@ -2,6 +2,8 @@
 deployed at https://dry-eyrie-85153.herokuapp.com/
 to the following criteria criteria  
 
+![](./img/screenshot.PNG)
+
 ## Acceptance Criteria
 
 ```md
